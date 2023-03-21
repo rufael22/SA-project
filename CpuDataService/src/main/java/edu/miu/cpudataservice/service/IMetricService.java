@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface IMetricService {
-    void getAndSendData(String url);
     Metric getData(String url);
     void sendData(String url, Metric metric);
 
