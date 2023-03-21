@@ -28,6 +28,6 @@ public class CpuDataServiceApplication implements CommandLineRunner {
 
         String apiUrl = "http://localhost:19999/api/v1/data?chart=system.cpu";
         apiUrl += "&after=-2&format=json&points=1";
-        cpuService.getAndSendData(apiUrl);
+        cpuService.getData(apiUrl);
     }
 }
