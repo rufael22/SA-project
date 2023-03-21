@@ -1,0 +1,20 @@
+package miu.edu.swaproject.domain;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class CpuData implements Metric {
+
+    private Computer computer;
+    private Long time;
+    private double user;
+    private double nice;
+    private double system;
+
+}
+
+
