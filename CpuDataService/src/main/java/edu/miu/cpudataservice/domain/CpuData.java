@@ -3,6 +3,7 @@ package edu.miu.cpudataservice.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -12,6 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class CpuData implements Metric {
 
     private Computer computer;
+    @Id
     private Long time;
     private double user;
     private double nice;

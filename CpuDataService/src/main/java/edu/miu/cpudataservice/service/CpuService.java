@@ -1,7 +1,9 @@
 package edu.miu.cpudataservice.service;
 
 import edu.miu.cpudataservice.domain.CpuData;
+import edu.miu.cpudataservice.repository.CpuDataRepository;
 import org.apache.tomcat.util.json.JSONParser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -9,6 +11,9 @@ import java.util.List;
 
 @Service
 public class CpuService implements IMetricService {
+
+    @Autowired
+    CpuDataRepository cpuDataRepository;
     public void getAndSendData(String url) {
         while (true) {
             try {
