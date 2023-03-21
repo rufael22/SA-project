@@ -18,6 +18,7 @@
         <module name="MainDiskDataService" />
         <module name="RegistryService" />
         <module name="MainNetworkDataService" />
+        <module name="SA-project" />
       </profile>
     </annotationProcessing>
   </component>
@@ -33,6 +34,7 @@
       <module name="NetworkDataService" options="-parameters" />
       <module name="RamDataService" options="-parameters" />
       <module name="RegistryService" options="-parameters" />
+      <module name="SA-project" options="-parameters" />
       <module name="swa-project" options="-parameters" />
     </option>
   </component>
