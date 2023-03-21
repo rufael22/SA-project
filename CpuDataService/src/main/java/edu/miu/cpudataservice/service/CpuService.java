@@ -20,6 +20,8 @@ public class CpuService implements IMetricService {
     @Autowired
     CpuDataRepository cpuDataRepository;
 
+    @Autowired private CpuDataServiceClient cpuDataServiceClient;
+
     @Override
     public Metric getData(String url) {
         try {
@@ -45,21 +47,20 @@ public class CpuService implements IMetricService {
 
     @Override
     public void sendData(String url, Metric metric) {
-        RestTemplate restTemplate = new RestTemplate();
-        String url2 = "http://localhost:19999/api/v1/data?chart=system.cpu";
-        restTemplate.postForObject(url, metric, Metric.class);
-
+        String response = cpuDataServiceClient.sendRemoteData(metric);
+        System.out.println(response);
     }
 
-    @FeignClient(name = "MainCpuDataService", url = "http://", fallback = CpuDataServiceClientFallback.class)
+    @FeignClient(name = "Main-Cpu-Data-Service", fallback = CpuDataServiceClientFallback.class)
     interface CpuDataServiceClient {
-        @PostMapping("/api/v1/data")
-        void sendRemoteData(@RequestBody Metric metric);
+        @PostMapping("/cpu-data/send")
+        String sendRemoteData(@RequestBody Metric metric);
     }
     class CpuDataServiceClientFallback implements CpuDataServiceClient {
         @Override
-        public void sendRemoteData(Metric metric) {
-            cpuDataRepository.save((CpuData) metric);
+        public String sendRemoteData(Metric metric) {
+            CpuService.this.save((CpuData) metric);
+            return "Data saved locally!";
         }
     }
     @Override
