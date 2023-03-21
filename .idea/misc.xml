@@ -11,6 +11,7 @@
         <option value="$PROJECT_DIR$/DiskDataService/pom.xml" />
         <option value="$PROJECT_DIR$/NetworkDataService/pom.xml" />
         <option value="$PROJECT_DIR$/CpuDataService/pom.xml" />
+        <option value="$PROJECT_DIR$/KafkaServer/pom.xml" />
         <option value="$PROJECT_DIR$/MainCpuDataService/pom.xml" />
         <option value="$PROJECT_DIR$/MainDiskDataService/pom.xml" />
         <option value="$PROJECT_DIR$/MainNetworkDataService/pom.xml" />

@@ -11,6 +11,7 @@
         <module name="MainCpuDataService" />
         <module name="DiskDataService" />
         <module name="ConfigService" />
+        <module name="KafkaServer" />
         <module name="MainRamDataService" />
         <module name="NetworkDataService" />
         <module name="swa-project" />
