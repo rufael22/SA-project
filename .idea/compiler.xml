@@ -11,6 +11,7 @@
         <module name="MainCpuDataService" />
         <module name="DiskDataService" />
         <module name="ConfigService" />
+        <module name="KafkaServer" />
         <module name="MainRamDataService" />
         <module name="NetworkDataService" />
         <module name="swa-project" />
@@ -18,6 +19,7 @@
         <module name="MainDiskDataService" />
         <module name="RegistryService" />
         <module name="MainNetworkDataService" />
+        <module name="SA-project" />
       </profile>
     </annotationProcessing>
   </component>
@@ -33,6 +35,7 @@
       <module name="NetworkDataService" options="-parameters" />
       <module name="RamDataService" options="-parameters" />
       <module name="RegistryService" options="-parameters" />
+      <module name="SA-project" options="-parameters" />
       <module name="swa-project" options="-parameters" />
     </option>
   </component>
