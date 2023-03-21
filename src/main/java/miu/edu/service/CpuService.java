@@ -9,11 +9,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Service
 public class CpuService implements IMetricService {
-    @Autowired
-    RestOperations restOperations;
-    @Bean RestOperations restOperations() {
-        return new RestTemplate();
-    }
+
     public void getAndSendData(String url) {
         RestTemplate restTemplate = new RestTemplate();
         String response = restTemplate.getForObject(url, String.class);
