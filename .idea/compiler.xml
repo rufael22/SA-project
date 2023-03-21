@@ -7,19 +7,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="CpuDataService" />
-        <module name="MainCpuDataService" />
-        <module name="DiskDataService" />
-        <module name="ConfigService" />
-        <module name="KafkaServer" />
-        <module name="MainRamDataService" />
         <module name="NetworkDataService" />
-        <module name="swa-project" />
-        <module name="RamDataService" />
         <module name="MainDiskDataService" />
-        <module name="RegistryService" />
         <module name="MainNetworkDataService" />
         <module name="SA-project" />
+        <module name="CpuDataService" />
+        <module name="MainCpuDataService" />
+        <module name="KafkaServer" />
+        <module name="DiskDataService" />
+        <module name="ConfigService" />
+        <module name="MainRamDataService" />
+        <module name="swa-project" />
+        <module name="RamDataService" />
+        <module name="RegistryService" />
       </profile>
     </annotationProcessing>
   </component>
@@ -28,6 +28,7 @@
       <module name="ConfigService" options="-parameters" />
       <module name="CpuDataService" options="-parameters" />
       <module name="DiskDataService" options="-parameters" />
+      <module name="KafkaServer" options="-parameters" />
       <module name="MainCpuDataService" options="-parameters" />
       <module name="MainDiskDataService" options="-parameters" />
       <module name="MainNetworkDataService" options="-parameters" />
