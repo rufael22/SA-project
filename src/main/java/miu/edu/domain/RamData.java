@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RamData implements Metric {
+
+    private Computer computer;
     private Long time;
     private double active;
     private double wired;

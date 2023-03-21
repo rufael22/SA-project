@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Network implements Metric {
+
+    private Computer computer;
     private Long time;
     private double received;
     private double sent;

@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CpuData implements Metric {
+
+    private Computer computer;
     private Long time;
     private double user;
     private double nice;

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DiskData implements Metric {
+    private Computer computer;
     private Long time;
     private double in;
     private double out;
