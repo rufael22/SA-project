@@ -29,7 +29,7 @@ public class MainCpuDataServiceApplication implements CommandLineRunner {
                 String apiUrl = "http://localhost:19999/api/v1/data?chart=system.cpu";
                 apiUrl += "&after=-2&format=json&points=1";
                 CpuData data = (CpuData) cpuServices.getData(apiUrl);
-                if(data != null) cpuServices.save(data);
+                if(data != null) cpuServices.sendData(data);
             }
         }, 0, 1000);
 

@@ -14,6 +14,9 @@ public class CpuDataService implements IMetricService{
 
     @Autowired
     CpuRepository cpuRepository;
+
+    @Autowired
+    KafkaProducerService kafkaProducerService;
     @Override
     public Metric getData(String url) {
         try {
@@ -38,8 +41,10 @@ public class CpuDataService implements IMetricService{
     }
 
     @Override
-    public void sendData(String url, Metric metric) {
+    public void sendData(Metric metric) {
 
+
+        kafkaProducerService.send((CpuData)metric);
     }
 
     @Override
