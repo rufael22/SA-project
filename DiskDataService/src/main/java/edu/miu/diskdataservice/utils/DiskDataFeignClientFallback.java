@@ -1,4 +1,4 @@
-package edu.miu.diskdataservice.util;
+package edu.miu.diskdataservice.utils;
 
 
 import edu.miu.diskdataservice.domain.DiskData;

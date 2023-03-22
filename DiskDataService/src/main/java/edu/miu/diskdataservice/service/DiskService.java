@@ -5,7 +5,7 @@ import edu.miu.diskdataservice.domain.Computer;
 import edu.miu.diskdataservice.domain.DiskData;
 import edu.miu.diskdataservice.domain.Metric;
 import edu.miu.diskdataservice.repository.DiskDataRepository;
-import edu.miu.diskdataservice.util.DiskDataFeignClient;
+import edu.miu.diskdataservice.utils.DiskDataFeignClient;
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,7 +26,7 @@ public class DiskService implements IMetricService {
     @Autowired
     DiskDataRepository diskDataRepository;
 
-   // @Qualifier()
+    @Qualifier("edu.miu.diskdataservice.utils.DiskDataFeignClient")
     @Autowired private DiskDataFeignClient diskDataFeignClient;
 
     @Override
@@ -40,13 +40,13 @@ public class DiskService implements IMetricService {
             List<Object> values = (List<Object>) data.get(0);
 
             Computer computer = new Computer(computerId, computerName);
-            DiskData cpuData = new DiskData(computer,
+            DiskData diskData = new DiskData(computer,
                     Long.parseLong(values.get(0).toString()),
                     Double.parseDouble(values.get(1).toString()),
                     Double.parseDouble(values.get(2).toString())
                     );
 
-            return cpuData;
+            return diskData;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
