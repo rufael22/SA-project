@@ -53,7 +53,7 @@ public class CpuService implements IMetricService {
     }
 
     @Override
-    public void sendData(String url, Metric metric) {
+    public void sendData(Metric metric) {
         String response = cpuDataFeignClient.sendRemoteData(metric);
         System.out.println(response);
     }
