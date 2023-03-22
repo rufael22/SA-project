@@ -10,10 +10,10 @@
         <module name="NetworkDataService" />
         <module name="MainDiskDataService" />
         <module name="MainNetworkDataService" />
+        <module name="demo" />
         <module name="SA-project" />
         <module name="CpuDataService" />
         <module name="MainCpuDataService" />
-        <module name="KafkaServer" />
         <module name="DiskDataService" />
         <module name="ConfigService" />
         <module name="MainRamDataService" />
@@ -22,6 +22,9 @@
         <module name="RegistryService" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="KafkaServer" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
@@ -37,6 +40,7 @@
       <module name="RamDataService" options="-parameters" />
       <module name="RegistryService" options="-parameters" />
       <module name="SA-project" options="-parameters" />
+      <module name="demo" options="-parameters" />
       <module name="swa-project" options="-parameters" />
     </option>
   </component>
