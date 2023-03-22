@@ -1,6 +1,7 @@
 package edu.miu.diskdataservice.util;
 
-import edu.miu.cpudataservice.domain.Metric;
+
+import edu.miu.diskdataservice.domain.Metric;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
