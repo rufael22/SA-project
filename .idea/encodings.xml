@@ -5,6 +5,7 @@
     <file url="file://$PROJECT_DIR$/CpuDataService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/DiskDataService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/KafkaServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/KafkaServer/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/MainCpuDataService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/MainDiskDataService/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/MainNetworkDataService/src/main/java" charset="UTF-8" />
