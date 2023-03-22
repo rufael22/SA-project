@@ -1,9 +1,9 @@
-package edu.miu.maincpudataservice.service;
+package edu.miu.mainramdataservice.service;
 
-import edu.miu.maincpudataservice.domain.Computer;
-import edu.miu.maincpudataservice.domain.CpuData;
-import edu.miu.maincpudataservice.domain.Metric;
-import edu.miu.maincpudataservice.repository.CpuRepository;
+import edu.miu.mainramdataservice.domain.Computer;
+import edu.miu.mainramdataservice.domain.Metric;
+import edu.miu.mainramdataservice.domain.RamData;
+import edu.miu.mainramdataservice.repository.RamRepository;
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,19 +11,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+
 @Service
-public class CpuDataService implements IMetricService{
+public class RamDataService implements IMetricService {
     @Value("${computer.id}")
     private Long computerId;
 
     @Value("${computer.name}")
     private String computerName;
-
     @Autowired
-    CpuRepository cpuRepository;
-
-    @Autowired
-    KafkaProducerService kafkaProducerService;
+    RamRepository ramRepository;
     @Override
     public Metric getData(String url) {
         try {
@@ -35,13 +32,18 @@ public class CpuDataService implements IMetricService{
             List<Object> values = (List<Object>) data.get(0);
 
             Computer computer = new Computer(computerId, computerName);
-            CpuData cpuData = new CpuData(computer,
+            RamData ramData = new RamData(computer,
                     Long.parseLong(values.get(0).toString()),
                     Double.parseDouble(values.get(1).toString()),
                     Double.parseDouble(values.get(2).toString()),
-                    Double.parseDouble(values.get(3).toString()));
+                    Double.parseDouble(values.get(3).toString()),
+                    Double.parseDouble(values.get(4).toString()),
+                    Double.parseDouble(values.get(5).toString()),
+                    Double.parseDouble(values.get(6).toString()),
+                    Double.parseDouble(values.get(7).toString()),
+                    Double.parseDouble(values.get(8).toString()));
 
-            return cpuData;
+            return ramData;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -51,13 +53,11 @@ public class CpuDataService implements IMetricService{
     @Override
     public void sendData(Metric metric) {
 
-
-        kafkaProducerService.send((CpuData)metric);
     }
 
     @Override
     public void save(Metric metric) {
-        cpuRepository.save((CpuData) metric);
+        ramRepository.save((RamData) metric);
 
     }
 }
