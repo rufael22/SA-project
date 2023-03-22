@@ -1,10 +1,10 @@
-package edu.miu.ramdataservice.service;
+package edu.miu.diskdataservice.service;
 
-import edu.miu.ramdataservice.domain.Computer;
-import edu.miu.ramdataservice.domain.Metric;
-import edu.miu.ramdataservice.domain.RamData;
-import edu.miu.ramdataservice.repository.RamDataRepository;
-import edu.miu.ramdataservice.utils.RamDataFeignClient;
+
+import edu.miu.diskdataservice.domain.Computer;
+import edu.miu.diskdataservice.domain.Metric;
+import edu.miu.diskdataservice.repository.DiskDataRepository;
+import edu.miu.diskdataservice.util.DiskDataFeignClient;
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Service
-public class RamService implements IMetricService {
+public class CpuService implements IMetricService {
     @Value("${computer.id}")
     private Long computerId;
 
@@ -23,9 +23,11 @@ public class RamService implements IMetricService {
     private String computerName;
 
     @Autowired
-    private RamDataRepository ramDataRepository;
-    @Qualifier("edu.miu.ramdataservice.utils.RamDataFeignClient")
-    @Autowired private RamDataFeignClient ramDataFeignClient;
+    DiskDataRepository cpuDataRepository;
+
+    @Qualifier("edu.miu.cpudataservice.utils.DiskDataFeignClient")
+    @Autowired private DiskDataFeignClient cpuDataFeignClient;
+
     @Override
     public Metric getData(String url) {
         try {
@@ -37,18 +39,13 @@ public class RamService implements IMetricService {
             List<Object> values = (List<Object>) data.get(0);
 
             Computer computer = new Computer(computerId, computerName);
-            RamData ramData = new RamData(computer,
+            DickData cpuData = new CpuData(computer,
                     Long.parseLong(values.get(0).toString()),
                     Double.parseDouble(values.get(1).toString()),
-                  Double.parseDouble(values.get(2).toString()),
-                   Double.parseDouble(values.get(3).toString()),
-                    Double.parseDouble(values.get(4).toString()),
-                    Double.parseDouble(values.get(5).toString()),
-                    Double.parseDouble(values.get(6).toString()),
-                    Double.parseDouble(values.get(7).toString()),
-                    Double.parseDouble(values.get(8).toString()));
+                    Double.parseDouble(values.get(2).toString()),
+                    Double.parseDouble(values.get(3).toString()));
 
-            return ramData;
+            return cpuData;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -57,13 +54,12 @@ public class RamService implements IMetricService {
 
     @Override
     public void sendData(Metric metric) {
-        String response = ramDataFeignClient.sendRemoteData(metric);
+        String response = cpuDataFeignClient.sendRemoteData(metric);
         System.out.println(response);
     }
-
     @Override
     public void save(Metric metric) {
-        ramDataRepository.save((RamData) metric);
-
+        cpuDataRepository.save((CpuData) metric);
     }
 }
+
