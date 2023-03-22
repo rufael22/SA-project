@@ -1,26 +1,32 @@
 package edu.miu.cpudataservice.service;
 
+import edu.miu.cpudataservice.domain.Computer;
 import edu.miu.cpudataservice.domain.CpuData;
 import edu.miu.cpudataservice.domain.Metric;
 import edu.miu.cpudataservice.repository.CpuDataRepository;
-import feign.Feign;
+import edu.miu.cpudataservice.utils.CpuDataFeignClient;
 import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 @Service
 public class CpuService implements IMetricService {
+    @Value("${computer.id}")
+    private Long computerId;
+
+    @Value("${computer.name}")
+    private String computerName;
 
     @Autowired
     CpuDataRepository cpuDataRepository;
 
-    @Autowired private CpuDataServiceClient cpuDataServiceClient;
+    @Qualifier("edu.miu.cpudataservice.utils.CpuDataFeignClient")
+    @Autowired private CpuDataFeignClient cpuDataFeignClient;
 
     @Override
     public Metric getData(String url) {
@@ -32,7 +38,8 @@ public class CpuService implements IMetricService {
             List<Object> data = (List<Object>) parser.parseObject().get("data");
             List<Object> values = (List<Object>) data.get(0);
 
-            CpuData cpuData = new CpuData(null,
+            Computer computer = new Computer(computerId, computerName);
+            CpuData cpuData = new CpuData(computer,
                     Long.parseLong(values.get(0).toString()),
                     Double.parseDouble(values.get(1).toString()),
                     Double.parseDouble(values.get(2).toString()),
@@ -47,28 +54,12 @@ public class CpuService implements IMetricService {
 
     @Override
     public void sendData(String url, Metric metric) {
-        String response = cpuDataServiceClient.sendRemoteData(metric);
+        String response = cpuDataFeignClient.sendRemoteData(metric);
         System.out.println(response);
-    }
-
-    @FeignClient(name = "Main-Cpu-Data-Service", fallback = CpuDataServiceClientFallback.class)
-    interface CpuDataServiceClient {
-        @PostMapping("/cpu-data/send")
-        String sendRemoteData(@RequestBody Metric metric);
-    }
-    class CpuDataServiceClientFallback implements CpuDataServiceClient {
-        @Override
-        public String sendRemoteData(Metric metric) {
-            CpuService.this.save((CpuData) metric);
-            return "Data saved locally!";
-        }
     }
     @Override
     public void save(Metric metric) {
         cpuDataRepository.save((CpuData) metric);
-
     }
-
-
 }
 
