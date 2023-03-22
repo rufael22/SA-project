@@ -31,7 +31,7 @@
       <module name="ConfigService" options="-parameters" />
       <module name="CpuDataService" options="-parameters" />
       <module name="DiskDataService" options="-parameters" />
-      <module name="KafkaServer" options="" />
+      <module name="KafkaServer" options="-parameters" />
       <module name="MainCpuDataService" options="-parameters" />
       <module name="MainDiskDataService" options="-parameters" />
       <module name="MainNetworkDataService" options="-parameters" />
