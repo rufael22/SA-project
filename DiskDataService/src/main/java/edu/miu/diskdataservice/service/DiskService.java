@@ -2,6 +2,7 @@ package edu.miu.diskdataservice.service;
 
 
 import edu.miu.diskdataservice.domain.Computer;
+import edu.miu.diskdataservice.domain.DiskData;
 import edu.miu.diskdataservice.domain.Metric;
 import edu.miu.diskdataservice.repository.DiskDataRepository;
 import edu.miu.diskdataservice.util.DiskDataFeignClient;
@@ -15,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Service
-public class CpuService implements IMetricService {
+public class DiskService implements IMetricService {
     @Value("${computer.id}")
     private Long computerId;
 
@@ -23,10 +24,10 @@ public class CpuService implements IMetricService {
     private String computerName;
 
     @Autowired
-    DiskDataRepository cpuDataRepository;
+    DiskDataRepository diskDataRepository;
 
-    @Qualifier("edu.miu.cpudataservice.utils.DiskDataFeignClient")
-    @Autowired private DiskDataFeignClient cpuDataFeignClient;
+   // @Qualifier()
+    @Autowired private DiskDataFeignClient diskDataFeignClient;
 
     @Override
     public Metric getData(String url) {
@@ -39,11 +40,11 @@ public class CpuService implements IMetricService {
             List<Object> values = (List<Object>) data.get(0);
 
             Computer computer = new Computer(computerId, computerName);
-            DickData cpuData = new CpuData(computer,
+            DiskData cpuData = new DiskData(computer,
                     Long.parseLong(values.get(0).toString()),
                     Double.parseDouble(values.get(1).toString()),
-                    Double.parseDouble(values.get(2).toString()),
-                    Double.parseDouble(values.get(3).toString()));
+                    Double.parseDouble(values.get(2).toString())
+                    );
 
             return cpuData;
         } catch (Exception e) {
@@ -54,12 +55,12 @@ public class CpuService implements IMetricService {
 
     @Override
     public void sendData(Metric metric) {
-        String response = cpuDataFeignClient.sendRemoteData(metric);
+        String response = diskDataFeignClient.sendRemoteData(metric);
         System.out.println(response);
     }
     @Override
     public void save(Metric metric) {
-        cpuDataRepository.save((CpuData) metric);
+        diskDataRepository.save((DiskData) metric);
     }
 }
 

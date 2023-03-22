@@ -1,6 +1,7 @@
 package edu.miu.diskdataservice.service;
 
-import edu.miu.cpudataservice.domain.Metric;
+
+import edu.miu.diskdataservice.domain.Metric;
 
 public interface IMetricService {
     Metric getData(String url);
