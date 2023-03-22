@@ -25,6 +25,7 @@ public class NetworkDataService implements IMetricService {
     @Autowired
     NetworkDataRepository networkDataRepository;
 
+    @Qualifier("edu.miu.networkdataservice.utils.NetworkDataFeignClient")
     @Autowired private NetworkDataFeignClient networkDataFeignClient;
 
     @Override

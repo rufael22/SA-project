@@ -14,7 +14,6 @@
         <module name="SA-project" />
         <module name="CpuDataService" />
         <module name="MainCpuDataService" />
-        <module name="KafkaServer" />
         <module name="DiskDataService" />
         <module name="ConfigService" />
         <module name="MainRamDataService" />
@@ -23,6 +22,9 @@
         <module name="RegistryService" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="KafkaServer" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
