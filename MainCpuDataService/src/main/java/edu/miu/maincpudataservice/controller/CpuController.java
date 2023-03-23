@@ -14,8 +14,8 @@ public class CpuController {
     @Autowired
     IMetricService cpuService;
     @PostMapping("/send")
-    public String getCpu(@RequestBody CpuData cpuData){
-        cpuService.save(cpuData);
-        return "Data saved succesfully!";
+    public String getCpu(@RequestBody CpuData cpuData) {
+        cpuService.sendData(cpuData);
+        return "Data sent succesfully!";
     }
 }

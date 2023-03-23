@@ -25,6 +25,9 @@ public class DiskService implements IMetricService {
     @Autowired
     DiskDataRepository diskDataRepository;
 
+    @Autowired
+    KafkaProducerService kafkaProducerService;
+
 
     @Override
     public Metric getData(String url) {
@@ -52,6 +55,8 @@ public class DiskService implements IMetricService {
 
     @Override
     public void sendData(Metric metric) {
+        kafkaProducerService.send((DiskData) metric);
+        System.out.println("Data sent to Kafka!");
 
     }
     @Override

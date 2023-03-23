@@ -30,7 +30,7 @@ public class MainDiskDataServiceApplication implements CommandLineRunner {
                 String apiUrl = "http://localhost:19999/api/v1/data?chart=system.io";
                 apiUrl += "&after=-2&format=json&points=1";
                 DiskData data = (DiskData) diskService.getData(apiUrl);
-                if(data != null) diskService.save(data);
+                if(data != null) diskService.sendData(data);
             }
         }, 0, 1000);
     }

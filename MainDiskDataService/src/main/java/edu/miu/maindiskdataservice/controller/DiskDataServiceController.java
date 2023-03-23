@@ -17,7 +17,7 @@ public class DiskDataServiceController {
     IMetricService diskService;
     @PostMapping("/send")
     public String getDisk(@RequestBody DiskData diskData){
-        diskService.save(diskData);
-        return "Data saved succesfully!";
+        diskService.sendData(diskData);
+        return "Data sent succesfully!";
     }
 }
