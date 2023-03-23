@@ -1,6 +1,7 @@
 package edu.miu.kafkaserver.config;
 
 import edu.miu.kafkaserver.domain.CpuData;
+import edu.miu.kafkaserver.domain.DiskData;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class KafkaConsumerConfig {
+public class KafkaDiskDataConsumerConfig {
 
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootStrapServer;
@@ -31,16 +32,25 @@ public class KafkaConsumerConfig {
     }
 
     @Bean
-    public ConsumerFactory<String, CpuData> consumerFactory() {
-        return new DefaultKafkaConsumerFactory<>(consumerConfigs());
+    public ConsumerFactory<String, DiskData> consumerFactory() {
+        JsonDeserializer<DiskData> deserializer = new JsonDeserializer<>(
+                DiskData.class
+        );
+        deserializer.setRemoveTypeHeaders(false);
+        deserializer.addTrustedPackages("*");
+        deserializer.setUseTypeMapperForKey(true);
+
+        return new DefaultKafkaConsumerFactory<>(consumerConfigs(),
+                new StringDeserializer(), deserializer);
     }
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, CpuData> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, CpuData> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, DiskData> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, DiskData> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
     }
 
 }
+
 

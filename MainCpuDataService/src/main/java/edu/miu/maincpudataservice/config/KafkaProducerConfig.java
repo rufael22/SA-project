@@ -18,23 +18,22 @@ import java.util.Map;
 @Configuration
 public class KafkaProducerConfig {
 
-    @Value("${custom-kafka1.bootStrapServer}")
-    private String bootStrapServer;
+    @Value("${spring.kafka.bootstrap-servers}")
+    private String bootStrapServers;
 
     @Bean
     public KafkaTemplate<String, CpuData> KafkaTemplate(){
         return new KafkaTemplate<>(producerfactory());
     }
 
-
     public ProducerFactory<String,CpuData> producerfactory() {
         Map<String, Object> config = new HashMap<>();
-        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServer);
+        config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServers);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         config.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         return new DefaultKafkaProducerFactory<>(config);
 
     }
 
-    }
+}
 

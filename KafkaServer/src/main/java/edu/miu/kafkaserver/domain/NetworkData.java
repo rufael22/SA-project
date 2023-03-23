@@ -10,9 +10,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document
-public class Computer {
-    @Id
-    private long id;
-    private String name;
+public class NetworkData implements Metric {
 
+    private Computer computer;
+    @Id
+    private Long time;
+    private double received;
+    private double sent;
 }

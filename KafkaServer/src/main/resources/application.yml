@@ -7,11 +7,13 @@ eureka:
 
 spring:
   kafka:
-    bootstrap-servers: 10.2.200.154:9092
+    bootstrap-servers: localhost:9092
+    consumer:
+      properties:
+        spring.json.trusted.packages: "*"
   cloud:
     config:
       import-check.enabled: false
 
   application:
     name: Kafka-Server
-

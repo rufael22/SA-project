@@ -7,12 +7,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Document
-public class Computer {
+public class DiskData implements Metric {
+    private Computer computer;
     @Id
-    private long id;
-    private String name;
-
+    private Long time;
+    private double in;
+    private double out;
 }

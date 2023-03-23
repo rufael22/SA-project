@@ -50,9 +50,8 @@ public class CpuDataService implements IMetricService{
 
     @Override
     public void sendData(Metric metric) {
-
-
         kafkaProducerService.send((CpuData)metric);
+        System.out.println("Data sent to Kafka!");
     }
 
     @Override

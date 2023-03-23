@@ -3,6 +3,7 @@ package edu.miu.maincpudataservice.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -11,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Computer {
 
+    @Id
     private long id;
     private String name;
 
