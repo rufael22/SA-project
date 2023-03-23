@@ -21,6 +21,10 @@ public class RamDataService implements IMetricService {
     private String computerName;
     @Autowired
     RamRepository ramRepository;
+
+    @Autowired
+    KafkaProducerService kafkaProducerService;
+
     @Override
     public Metric getData(String url) {
         try {
@@ -52,6 +56,9 @@ public class RamDataService implements IMetricService {
 
     @Override
     public void sendData(Metric metric) {
+        kafkaProducerService.send((RamData) metric);
+        System.out.println("Data sent to Kafka!");
+
 
     }
 

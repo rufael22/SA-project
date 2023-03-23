@@ -15,7 +15,7 @@ public class RamDataController {
     IMetricService ramService;
     @PostMapping("/send")
     public String getRam(@RequestBody RamData ramData){
-        ramService.save(ramData);
-        return "Data saved succesfully!";
+        ramService.sendData(ramData);
+        return "Data sent succesfully!";
     }
 }
