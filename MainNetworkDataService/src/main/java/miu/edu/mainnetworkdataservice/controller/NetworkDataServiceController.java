@@ -17,7 +17,7 @@ public class NetworkDataServiceController {
     IMetricService networkService;
     @PostMapping("/send")
     public String getRam(@RequestBody NetworkData networkData){
-        networkService.save(networkData);
-        return "Data saved succesfully!";
+        networkService.sendData(networkData);
+        return "Data sent succesfully!";
     }
 }

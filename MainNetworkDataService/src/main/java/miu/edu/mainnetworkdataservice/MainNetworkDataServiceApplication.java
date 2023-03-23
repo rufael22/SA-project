@@ -30,7 +30,7 @@ public class MainNetworkDataServiceApplication implements CommandLineRunner {
                 String apiUrl = "http://localhost:19999/api/v1/data?chart=system.ipv4";
                 apiUrl += "&after=-2&format=json&points=1";
                 NetworkData data = (NetworkData) networkDataService.getData(apiUrl);
-                if(data != null) networkDataService.save(data);
+                if(data != null) networkDataService.sendData(data);
             }
         }, 0, 1000);
     }

@@ -24,6 +24,9 @@ public class NetworkDataService implements IMetricService {
     @Autowired
     NetworkDataRepository networkDataRepository;
 
+    @Autowired
+    KafkaProducerService kafkaProducerService;
+
 
     @Override
     public Metric getData(String url) {
@@ -50,6 +53,8 @@ public class NetworkDataService implements IMetricService {
 
     @Override
     public void sendData(Metric metric) {
+        kafkaProducerService.send((NetworkData) metric);
+        System.out.println("Data sent to Kafka!");
 
     }
     @Override
