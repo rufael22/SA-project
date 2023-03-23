@@ -2,6 +2,7 @@ package edu.miu.kafkaserver.controller;
 
 import edu.miu.kafkaserver.domain.RamData;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -14,11 +15,10 @@ public class RamDataConsumerController {
     private static final String RAM_TOPIC ="TOPIC_RAM";
     Map<Long, RamData> lastestNetworkData = new HashMap<>();
 
-    @KafkaListener(topics = RAM_TOPIC)
+    @KafkaListener(topics = RAM_TOPIC, groupId = "ram-data-consumer-group", containerFactory = "ramDataKafkaListenerContainerFactory")
     public void receiveCpuData(RamData data) {
         lastestNetworkData.put(data.getComputer().getId(), data);
-        System.out.println("Network Data received from Kafka");
-        System.out.println(data.toString());
+        System.out.println("Ram Data received from Kafka");
     }
 
     @GetMapping("/{computerID}/get-current-data")
